@@ -3,7 +3,7 @@ import { DynamicControl } from './dynamic-forms.model';
 import { DynamicInputComponent } from './dynamic-controls/dynamic-input/dynamic-input.component';
 import { DynamicSelectComponent } from './dynamic-controls/dynamic-select/dynamic-select.component';
 import { DynamicDropdownComponent } from './dynamic-controls/dynamic-dropdown/dynamic-dropdown.component';
-import { DynamicFieldComponent } from './dynamic-controls/dynamic-input copy/dynamic-input.component';
+import { DynamicFieldComponent } from './dynamic-controls/dynamic-field/dynamic-field.component';
 
 type DynamicControlMap = {
   [T in DynamicControl['controlType']]: Type<any>

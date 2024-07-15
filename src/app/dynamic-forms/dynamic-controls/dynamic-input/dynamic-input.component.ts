@@ -16,11 +16,36 @@ import { BaseDynamicControlComponent } from '../base-dynamic-control/base-dynami
         [placeholder]="control.config.placeholder || control.config.label">
     </ng-container>
   `,
-  styles: ``,
+  styles: `
+  input {
+  border: none;
+  background-color: #F4F5F9;
+  border-radius: 9px;
+  margin: 4px;
+  padding: 0 12px;
+}
+
+input.ng-dirty {
+  color: #5F60DA;
+}
+
+input[disabled] {
+  color: #E0E2EC;
+  background-color: #0e1e32;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+*:focus {
+  outline: none;
+}
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DynamicInputComponent extends BaseDynamicControlComponent   {
 
 
-  
+
 }
