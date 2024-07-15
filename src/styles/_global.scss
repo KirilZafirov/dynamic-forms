@@ -1,0 +1,150 @@
+/* Global bootstrap styles */
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/reboot';
+@import '~bootstrap/scss/root';
+@import '~bootstrap/scss/utilities';
+@import '~bootstrap/scss/utilities/api';
+@import '~bootstrap/scss/helpers/visually-hidden';
+@import '~bootstrap/scss/dropdown'; 
+@import '~bootstrap/scss/forms';
+@import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/close'; 
+@import '~bootstrap/scss/badge'; 
+@import '~bootstrap/scss/transitions'; 
+
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  height: 100%;
+  overscroll-behavior: contain;
+
+  &.dialog-open {
+    overflow: hidden;
+  }
+}
+
+*:focus {
+  outline-color: $brand-color-primary;
+}
+
+ul,
+ol {
+  li {
+    line-height: 1.8;
+  }
+}
+
+a {
+  $link: $brand-color-sub;
+  color: $link;
+  border-bottom: 2px solid currentColor;
+  text-decoration: none;
+
+  &:hover {
+    color: darken($link, 20%);
+    text-decoration: none;
+  }
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #ccc;
+}
+
+label {
+  cursor: pointer;
+}
+
+::placeholder {
+  font-style: italic;
+}
+ 
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+select[readonly] {
+  pointer-events: none;
+  touch-action: none;
+  color: $form-select-disabled-color;
+  background-color: $form-select-disabled-bg;
+  border-color: $form-select-disabled-border-color;
+}
+ 
+ 
+
+// button overrides
+button[disabled] {
+  cursor: not-allowed;
+}
+
+button.clean-btn {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--bs-body-color);
+
+  &--no-dropdown-icon {
+    &:after {
+      display: none;
+    }
+  }
+}
+ 
+
+// dropdown
+.dropdown-item {
+  em {
+    font-style: normal;
+    font-weight: 600;
+  }
+}
+
+// buttons
+.btn-primary,
+.btn-secondary {
+  color: $white;
+}
+
+// forms
+.form-group {
+  margin-bottom: $gridunit * 2;
+}
+
+.form-control:not(.force-show-placeholder):disabled::placeholder,
+.form-control:not(.force-show-placeholder)[readonly]::placeholder {
+  opacity: 0;
+}
+
+// checkboxes
+.form-check-input {
+  cursor: pointer;
+
+  &:checked,
+  &:indeterminate {
+    background-color: $brand-color-primary !important;
+    border-color: $brand-color-primary !important;
+  }
+}
+
+.form-check-label {
+  font-size: 0.875rem;
+} 
+
+.form-check-input[disabled],
+.form-check-input:disabled {
+  ~ .form-check-label {
+    cursor: default;
+  }
+}
+ 

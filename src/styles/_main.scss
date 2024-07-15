@@ -1,0 +1,20 @@
+@import 'variables';
+@import 'global'; 
+:root {
+  @include media-breakpoint-up(xs) {
+    --current-breakpoint: xs;
+  }
+  @include media-breakpoint-up(sm) {
+    --current-breakpoint: sm;
+  }
+  @include media-breakpoint-up(md) {
+    --current-breakpoint: md;
+  }
+  @include media-breakpoint-up(lg) {
+    --current-breakpoint: lg;
+  }
+  @include media-breakpoint-up(xl) {
+    --current-breakpoint: xl;
+  }
+}
+ 

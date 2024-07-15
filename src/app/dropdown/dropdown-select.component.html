@@ -1,0 +1,246 @@
+<div
+  ngbDropdown
+  class="dropdown-select"
+  [autoClose]="!multiSelectEnabled ? true : 'outside'"
+  [attr.title]="
+    selectedItems.length === 0
+      ? placeholder
+        ? placeholder
+        : 'Select'
+      : multiSelectEnabled
+      ? null
+      : toStringFunction(selectedItems[0].displayValue)
+  "
+>
+  <button
+    [disabled]="disabled || readonly"
+    ngbDropdownToggle
+    type="button"
+    class="btn dropdown-select__toggle"
+    [class.dropdown-select__toggle--invalid]="invalid"
+    [attr.aria-controls]="formFieldId + '__list'"
+    [attr.id]="formFieldId"
+    [attr.title]="
+      selectedItems.length === 0
+        ? placeholder
+          ? placeholder
+          : 'Select'
+        : multiSelectEnabled
+        ? null
+        : toStringFunction(selectedItems[0].displayValue)
+    "
+  >
+    <div
+      class="dropdown-select__toggle-content"
+      [class.dropdown-select__toggle-content--disabled]="disabled || readonly"
+    > 
+        @if(selectedItems.length > 0) {
+          @for( selectedItem of selectedItems.slice(0, selectedItemLimit); track selectedItem.value){
+            <div
+            class="dropdown-select__selected-item" 
+            [class.dropdown-select__selected-item--multiple]="multiSelectEnabled"
+            [attr.title]="
+              itemTemplate ? toStringFunction(selectedItem.displayValue) : selectedItem.displayValue
+            "
+          >
+            <div class="dropdown-select__selected-item-wrapper">
+              @if(itemTemplate) {
+                @if(multiSelectEnabled) {
+                  <ng-container 
+                  [ngTemplateOutlet]="removeItemTmpl"
+                ></ng-container>
+                }
+              
+              <ng-container
+                [ngTemplateOutlet]="itemTemplate"
+                [ngTemplateOutletContext]="{ $implicit: selectedItem }"
+              ></ng-container>
+              } @else {
+                @if(multiSelectEnabled) {
+                  <ng-container 
+                [ngTemplateOutlet]="removeItemTmpl"
+              ></ng-container>
+                }
+              
+              @if(selectedItem.displayValue) {
+                {{ toStringFunction(selectedItem.displayValue) }}
+              } 
+              } 
+             
+            
+              <ng-template #removeItemTmpl>
+                @if(selectedItems.length > selectedItemLimit){
+                  <button 
+                  class="clean-btn dropdown-select__remove-item"
+                  title="Remove selected option"
+                  (click)="handleItemClick(selectedItem, false, $event)"
+                >
+                   X
+                </button>
+                }
+            
+              </ng-template>
+            </div>
+          </div>
+          }
+          @if(selectedItems.length > selectedItemLimit){
+            <div
+            class="dropdown-select__select-item" 
+            tooltipClass="tooltip--wide tooltip--limit-height"
+            container="body"
+            [closeDelay]="1000"
+            [ngbTooltip]="moreSelectedOptionsTooltipTemplate"
+          >
+            + {{ selectedItems.length - selectedItemLimit }} more
+          </div>
+          } 
+          <ng-template #moreSelectedOptionsTooltipTemplate>
+            <div class="dropdown-select__more-selected">
+              <h4 class="dropdown-select__more-selected-title">Other selected items:</h4>
+              <ul class="dropdown-select__more-selected-options">
+                @for(selectedItem of (selectedItems | moreSelectedOptions); track selectedItem){
+                  <li >
+                    {{ selectedItem }}
+                  </li>
+                } 
+              </ul>
+            </div>
+          </ng-template>
+        }@else {
+          <div>
+            <span class="dropdown-select__item--no-selection">{{ placeholder ?? 'Select' }}</span>
+          </div> 
+        } 
+        
+ 
+    </div>
+  </button>
+  <div
+    role="listbox"
+    [attr.id]="formFieldId + '__list'"
+    ngbDropdownMenu
+    [attr.aria-labelledby]="formFieldId"
+    class="dropdown-select__menu"
+    [style.maxHeight.px]="calculatedMaxHeight ? calculatedMaxHeight : null"
+  >
+  @if(itemsLimited) {
+    <button
+      ngbDropdownItem
+      [disabled]="true" 
+    >
+      Visible options limited to {{ itemLimit }} / {{ items.length.toLocaleString() }}
+    </button>
+  }
+  @if(multiSelectEnabled && selectAllEnabled) {
+    <button 
+    type="button"
+    ngbDropdownItem
+    class="dropdown-item dropdown-select__item dropdown-select__item--select-all"
+    title="Select all"
+    (click)="handleSelectAll()"
+  >
+    <input
+      type="checkbox"
+      class="form-check-input dropdown-select__checkbox"
+      [attr.checked]="allAreSelected ? true : null"
+    />
+    {{ allAreSelected ? 'Unselect all' : 'Select all' }}
+  </button>
+  }
+  @if(searchEnabled) {
+    <input
+    type="text"
+    (keyup.enter)="handleSearchKeyupEnter()"
+    #search
+    class="form-control dropdown-select__input"
+    aria-autocomplete="list"
+    placeholder="Search"
+    [attr.aria-expanded]="dropdownOpen ? 'true' : 'false'"
+    [attr.aria-controls]="formFieldId + '__list'"
+    [formControl]="searchFormControl" 
+  />
+  }
+  @if(noSelectionAllowed || (multiSelectEnabled && selectedItems.length !== 0)) {
+    <button
+    type="button"
+    ngbDropdownItem 
+    class="dropdown-item dropdown-select__item dropdown-select__item--clear-selection"
+    (click)="handleClearSelection()"
+    title="{{ noSelection ?? 'Clear selection' }}"
+    [disabled]="selectedItems.length === 0"
+  > 
+    {{ noSelection ?? 'Clear selection' }}
+  </button>
+  }
+
+    @for( item of availableItems; track item.value){
+      
+        <ng-container
+          [ngTemplateOutlet]="optionTpl"
+          [ngTemplateOutletContext]="{ $implicit: item, group: !!item.subOptions }"
+        >
+        </ng-container>
+        @if(item.subOptions) {
+          @for( subItem of item.subOptions; track subItem.value){
+            <ng-container 
+            [ngTemplateOutlet]="optionTpl"
+            [ngTemplateOutletContext]="{ $implicit: subItem, subItem: true }"
+          ></ng-container>
+          }
+        }
+     
+        <ng-template #optionTpl let-item let-group="group" let-subItem="subItem">
+          <button
+            [disabled]="group && !multiSelectEnabled"
+            type="button"
+            ngbDropdownItem
+            class="dropdown-item dropdown-select__item"
+            [class.dropdown-select__item--sub-item]="subItem"
+            [class.dropdown-select__item--selected]="isSelectedItem(item, group) && !itemTemplate"
+            [attr.title]="item.displayValue"
+            (click)="handleItemClick(item, group)"
+          >
+          @if (multiSelectEnabled) {
+              <input
+              type="checkbox" 
+              class="form-check-input dropdown-select__checkbox"
+              [attr.checked]="isSelectedItem(item, group) ? true : null"
+              tabindex="-1"
+            /> 
+          }
+        
+              @if (!itemTemplate) {
+                <div 
+                class="dropdown-select__item-inner"
+                [innerHTML]="toStringFunction(item.displayValue, searchFormControl.value)"
+              ></div>
+              } 
+            @if (itemTemplate) {
+              <div   class="dropdown-select__item-inner">
+                <ng-container
+                  [ngTemplateOutlet]="itemTemplate"
+                  [ngTemplateOutletContext]="{
+                    $implicit: item,
+                    active: isSelectedItem(item, group),
+                    highlight: searchFormControl.value
+                  }"
+                ></ng-container>
+              </div>
+            }
+         
+          </button>
+        </ng-template> 
+    }
+ 
+    @if(availableItems.length === 0) {
+      <button
+      [disabled]="true"
+      ngbDropdownItem 
+    >
+      No options available
+    </button>
+    }
+    
+  </div>
+</div>
+ 

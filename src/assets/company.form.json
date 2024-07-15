@@ -1,0 +1,37 @@
+{
+  "description": "The new company form config",
+  "controls": {
+    "companyName": {
+      "controlType": "input",
+      "type": "text",
+      "label": "Company Name",
+      "value": ""
+    },
+    "phone": {
+      "controlType": "input",
+      "type": "tel",
+      "label": "Phone Number",
+      "value": ""
+    },
+    "size": {
+      "controlType": "select",
+      "label": "Company Size",
+      "value": "",
+      "options": [
+        { "displayValue": "Up to 50 employees", "value": "small" },
+        { "displayValue": "50 - 150 employees", "value": "medium" },
+        { "displayValue": "More than 150 employees", "value": "large" }
+      ]
+    },
+    "somethingRandom": {
+      "controlType": "dropdown",
+      "label": "Company Size",
+      "value": "",
+      "options": [
+        { "displayValue": "Up to 50 employees", "value": "small" },
+        { "displayValue": "50 - 150 employees", "value": "medium" },
+        { "displayValue": "More than 150 employees", "value": "large" }
+      ]
+    }
+  }
+}
