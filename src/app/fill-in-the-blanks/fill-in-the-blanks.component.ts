@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { widgetDisplayOptions } from '../config/config';
 import { DynamicFormConfig } from '../dynamic-forms/dynamic-forms.model';
 import { tap } from 'rxjs';
@@ -9,7 +9,8 @@ import { HttpClient } from '@angular/common/http';
   standalone: true,
   imports: [],
   templateUrl: './fill-in-the-blanks.component.html',
-  styleUrl: './fill-in-the-blanks.component.scss'
+  styleUrl: './fill-in-the-blanks.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FillInTheBlanksComponent {
   configDisplayOptions = widgetDisplayOptions;

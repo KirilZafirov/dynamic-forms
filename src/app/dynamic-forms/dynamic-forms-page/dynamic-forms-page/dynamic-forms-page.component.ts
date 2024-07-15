@@ -1,30 +1,30 @@
-import { Component, Input, OnChanges } from '@angular/core';
-import { Observable } from 'rxjs'; 
-import { CommonModule, NgForOf, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
 import { DynamicFormConfig } from '../../dynamic-forms.model';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DynamicControlResolverService } from '../../dynamic-control-resolver.service';
 import { ControlInjectorPipe } from '../../control-injector.pipe';
- 
+import { KeyValuePipe, NgComponentOutlet } from '@angular/common';
+
 
 @Component({
   selector: 'app-dynamic-forms-page',
   standalone: true,
-  imports: [ CommonModule, ReactiveFormsModule, NgForOf, ControlInjectorPipe ],
+  imports: [NgComponentOutlet , ReactiveFormsModule, ControlInjectorPipe, KeyValuePipe],
   templateUrl: './dynamic-forms-page.component.html',
-  styleUrl: './dynamic-forms-page.component.scss'
+  styleUrl: './dynamic-forms-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DynamicFormsPageComponent implements OnChanges {
-  @Input() formConfig!: DynamicFormConfig; 
+  @Input() formConfig!: DynamicFormConfig;
 
   form!: FormGroup;
 
-  constructor( 
+  constructor(
     protected resolver: DynamicControlResolverService,
-  ) { }  
+  ) { }
 
-  
-  ngOnChanges() { 
+
+  ngOnChanges() {
     if (this.formConfig) {
       this.buildForm(this.formConfig.controls);
     }
@@ -33,7 +33,7 @@ export class DynamicFormsPageComponent implements OnChanges {
     this.form = new FormGroup({});
     Object.keys(controls).forEach((key) => {
       const control = controls[key];
-      const validators = this.resolveValidators(control as any); 
+      const validators = this.resolveValidators(control as any);
       const formControl = new FormControl(control.value, validators);
       this.form?.addControl(key, formControl);
     })
@@ -41,18 +41,18 @@ export class DynamicFormsPageComponent implements OnChanges {
 
   resolveValidators(validators: ValidatorConfig = {}) {
     return (Object.keys(validators) as Array<keyof ValidatorConfig>).map((validatorKey) => {
-        const validatorValue = validators[validatorKey];
-        if (validatorKey === 'required') {
-          return Validators.required;
-        }
-        if (validatorKey === 'email') {
-          return Validators.email;
-        }
-        if (validatorKey === 'minLength' && typeof validatorValue === 'number') {
-          return Validators.minLength(validatorValue);
-        }
-        return Validators.nullValidator
+      const validatorValue = validators[validatorKey];
+      if (validatorKey === 'required') {
+        return Validators.required;
       }
+      if (validatorKey === 'email') {
+        return Validators.email;
+      }
+      if (validatorKey === 'minLength' && typeof validatorValue === 'number') {
+        return Validators.minLength(validatorValue);
+      }
+      return Validators.nullValidator
+    }
     );
   }
 

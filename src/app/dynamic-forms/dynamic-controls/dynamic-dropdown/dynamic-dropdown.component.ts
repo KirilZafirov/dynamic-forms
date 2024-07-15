@@ -1,13 +1,13 @@
 
 
 
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BaseDynamicControlComponent } from '../base-dynamic-control/base-dynamic-control.component'; 
 import { DropdownSelectComponent, SelectOption } from '../../../dropdown/dropdown-select.component';
 
 @Component({
-  selector: 'app-dynamic-input',
+  selector: 'app-dynamic-dropdown',
   standalone: true,
   imports: [ReactiveFormsModule, DropdownSelectComponent, ReactiveFormsModule],
   template: `
@@ -36,7 +36,8 @@ import { DropdownSelectComponent, SelectOption } from '../../../dropdown/dropdow
         </div>
     </ng-container>
   `,
-  styles: ``
+  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DynamicDropdownComponent extends BaseDynamicControlComponent   {
   

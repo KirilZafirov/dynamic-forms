@@ -6,6 +6,7 @@ import {
   ElementRef,
   EventEmitter,
   HostListener,
+  inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -120,7 +121,7 @@ export class DropdownSelectComponent
       matches?.forEach((match) => {
         workingItem = `${displayValue}`.replace(match, `<em>${match}</em>`);
       });
-      return this.domSanitizer.bypassSecurityTrustHtml(workingItem);
+      return this.#domSanitizer.bypassSecurityTrustHtml(workingItem);
     };
   @Input() public searchMatchFunction: (
     searchValue: string,
@@ -135,11 +136,9 @@ export class DropdownSelectComponent
   ) => {
     return valueOne === valueTwo;
   };
-
-  constructor(
-    private readonly domSanitizer: DomSanitizer,
-    private readonly changeDetectorRef: ChangeDetectorRef,
-  ) { }
+  #domSanitizer = inject(DomSanitizer)
+  #changeDetectorRef = inject(ChangeDetectorRef)
+  
 
   public ngAfterViewInit(): void {
     this.checkMaxHeightBasedOnDropdownItemList();
@@ -265,7 +264,7 @@ export class DropdownSelectComponent
       this.selectedItems = [...selectedItems];
       this.updateSearchValue();
     }
-    this.changeDetectorRef.detectChanges();
+    this.#changeDetectorRef.detectChanges();
   }
 
   public registerOnChange(onChange: any): void {
@@ -285,7 +284,7 @@ export class DropdownSelectComponent
 
   public setDisabledState(disabled: boolean): void {
     this.disabled = disabled;
-    this.changeDetectorRef.detectChanges();
+    this.#changeDetectorRef.detectChanges();
   }
 
   public handleSearchKeyupEnter(): void {
@@ -445,7 +444,7 @@ export class DropdownSelectComponent
         ...(this.itemsLimited ? copiedItems.slice(0, ITEM_LIMIT) : copiedItems),
       ];
     }
-    this.changeDetectorRef.detectChanges();
+    this.#changeDetectorRef.detectChanges();
   }
 
   private handleSelectedItemsChange(): void {
@@ -468,7 +467,7 @@ export class DropdownSelectComponent
     });
     this.allAreSelected = this.selectedItems.length === realItems.length;
     this.checkMaxHeightBasedOnDropdownItemList();
-    this.changeDetectorRef.detectChanges();
+    this.#changeDetectorRef.detectChanges();
   }
 
   private findOriginalItem(copiedItem: SelectOption): SelectOption {

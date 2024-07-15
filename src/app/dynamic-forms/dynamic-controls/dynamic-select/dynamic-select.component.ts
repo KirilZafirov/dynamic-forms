@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgForOf } from '@angular/common'; 
 import { BaseDynamicControlComponent } from '../base-dynamic-control/base-dynamic-control.component';
@@ -20,7 +20,8 @@ import { BaseDynamicControlComponent } from '../base-dynamic-control/base-dynami
     </ng-container>
 
   `,
-  styles: ``
+  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DynamicSelectComponent extends BaseDynamicControlComponent {
 

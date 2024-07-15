@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DynamicFormsPageComponent } from './dynamic-forms/dynamic-forms-page/dynamic-forms-page/dynamic-forms-page.component';
 import { FillInTheBlanksComponent } from './fill-in-the-blanks/fill-in-the-blanks.component';
 import { DynamicFormConfig } from './dynamic-forms/dynamic-forms.model';
@@ -8,7 +8,8 @@ import { DynamicFormConfig } from './dynamic-forms/dynamic-forms.model';
   standalone: true,
   imports: [FillInTheBlanksComponent, DynamicFormsPageComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   title = 'dynamic-forms';

@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BaseDynamicControlComponent } from '../base-dynamic-control/base-dynamic-control.component';
 
 @Component({
-  selector: 'app-dynamic-input',
+  selector: 'app-dynamic-field',
   standalone: true,
   imports: [ ReactiveFormsModule ],
   template: `
@@ -19,7 +19,7 @@ import { BaseDynamicControlComponent } from '../base-dynamic-control/base-dynami
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DynamicInputComponent extends BaseDynamicControlComponent   {
+export class DynamicFieldComponent extends BaseDynamicControlComponent   {
 
 
   
