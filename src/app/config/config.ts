@@ -14,7 +14,7 @@
  *  labelType = 'custom-label'
  *      Please enter the widget name: [INPUT: 'name'], now pick the display label type: [SELECT: 'labelType'] Label text prefix: [INPUT: 'labelTextPrefix'] Label text suffix: [INPUT: 'labelTextSuffix']. After you configure the widget, we are ready for displaying it in your workspace.
  */
-const widgetDisplayOptions = {
+export const widgetDisplayOptions = {
   formData: {
     name: {
       placeholder: "Widget name",

@@ -1,3 +1,6 @@
 
+<fill-in-the-blanks (buildForm)="buildForm($event)"> </fill-in-the-blanks>
 
-<app-dynamic-forms-page></app-dynamic-forms-page>
+@if(formConfig) {
+  <app-dynamic-forms-page [formConfig]="formConfig"></app-dynamic-forms-page>
+}

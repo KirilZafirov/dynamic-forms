@@ -12,7 +12,8 @@ import { BaseDynamicControlComponent } from '../base-dynamic-control/base-dynami
         [formControlName]="control.controlKey"
         [value]="control.config.value"
         [id]="control.controlKey"
-        [type]="control.config.type">
+        [type]="control.config.type"
+        [placeholder]="control.config.placeholder"]>
     </ng-container>
   `,
   styles: ``

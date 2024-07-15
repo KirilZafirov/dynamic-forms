@@ -9,6 +9,7 @@ export interface DynamicControl<T = string> {
   options?: SelectOption[];
   label: string;
   value: T | null;
+  placeholder?: string;
   validators?: {
     [key in ValidatorKeys]?: unknown;
   }
@@ -19,4 +20,6 @@ export interface DynamicFormConfig {
   controls: {
     [key: string]: DynamicControl
   }
-}
+} 
+ 
+ 
