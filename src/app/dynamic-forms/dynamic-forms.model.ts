@@ -8,6 +8,9 @@ export interface DynamicControl<T = string> {
   type?: string;
   options?: SelectOption[];
   label: string;
+  multiSelectEnabled?: boolean;
+  selectAllEnabled?: boolean;
+  searchEnabled?: boolean; 
   value: T | null;
   placeholder?: string;
   validators?: {

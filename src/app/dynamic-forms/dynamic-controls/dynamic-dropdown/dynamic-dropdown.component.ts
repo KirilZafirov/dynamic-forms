@@ -1,7 +1,7 @@
 
 
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BaseDynamicControlComponent } from '../base-dynamic-control/base-dynamic-control.component'; 
 import { DropdownSelectComponent, SelectOption } from '../../../dropdown/dropdown-select.component';
@@ -11,24 +11,18 @@ import { DropdownSelectComponent, SelectOption } from '../../../dropdown/dropdow
   standalone: true,
   imports: [ReactiveFormsModule, DropdownSelectComponent, ReactiveFormsModule],
   template: `
-    <ng-container [formGroup]="formGroup">
-      <!-- <input
-        
-        [value]="control.config.value"
-        [id]="control.controlKey"
-        [type]="control.config.type"> --> 
+    <ng-container [formGroup]="formGroup"> 
            <div style="min-width: 250px;">
              <ng-template #dropdownTemplate let-item let-highlight="highlight">
                 <strong>{{ item.displayValue }}</strong
                >({{ highlight }})
-             </ng-template>
-             <label for="uniqueId">{{control.config.label}}</label><br />
-             <pre>(maxHeight: 600px)</pre>
+             </ng-template> 
+           
              <dropdown-select
                [toStringFunction]="objectToStringFunction"
-               [multiSelectEnabled]="true"
-               [selectAllEnabled]="true"
-               [searchEnabled]="false" 
+               [multiSelectEnabled]="control.config.multiSelectEnabled || false"
+               [selectAllEnabled]="control.config.selectAllEnabled || false"
+               [searchEnabled]="control.config.searchEnabled || false" 
                [items]="control.config.options || []"
                [formControlName]="control.controlKey"
                [itemTemplate]="dropdownTemplate"

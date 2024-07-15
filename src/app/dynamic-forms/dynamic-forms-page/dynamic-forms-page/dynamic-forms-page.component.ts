@@ -10,7 +10,7 @@ import { ControlInjectorPipe } from '../../control-injector.pipe';
 @Component({
   selector: 'app-dynamic-forms-page',
   standalone: true,
-  imports: [ CommonModule, ReactiveFormsModule, NgForOf, NgIf, ControlInjectorPipe ],
+  imports: [ CommonModule, ReactiveFormsModule, NgForOf, ControlInjectorPipe ],
   templateUrl: './dynamic-forms-page.component.html',
   styleUrl: './dynamic-forms-page.component.scss'
 })

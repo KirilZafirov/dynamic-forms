@@ -13,10 +13,13 @@
       "label": "Phone Number",
       "value": ""
     },
-    "size": {
-      "controlType": "select",
+    "size": { 
+      "controlType": "dropdown",
       "label": "Company Size",
       "value": "",
+      "multiSelectEnabled": false,
+      "selectAllEnabled": false,
+      "searchEnabled": false, 
       "options": [
         { "displayValue": "Up to 50 employees", "value": "small" },
         { "displayValue": "50 - 150 employees", "value": "medium" },
@@ -25,8 +28,11 @@
     },
     "somethingRandom": {
       "controlType": "dropdown",
-      "label": "Company Size",
+      "label": "Something Random",
       "value": "",
+      "multiSelectEnabled": true,
+      "selectAllEnabled": true,
+      "searchEnabled": false, 
       "options": [
         { "displayValue": "Up to 50 employees", "value": "small" },
         { "displayValue": "50 - 150 employees", "value": "medium" },
@@ -34,4 +40,4 @@
       ]
     }
   }
-}
+} 

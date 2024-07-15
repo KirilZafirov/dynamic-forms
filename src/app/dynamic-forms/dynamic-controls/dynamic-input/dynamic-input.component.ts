@@ -13,16 +13,13 @@ import { BaseDynamicControlComponent } from '../base-dynamic-control/base-dynami
         [value]="control.config.value"
         [id]="control.controlKey"
         [type]="control.config.type"
-        [placeholder]="control.config.placeholder"]>
+        [placeholder]="control.config.placeholder || control.config.label">
     </ng-container>
   `,
   styles: ``
 })
-export class DynamicInputComponent extends BaseDynamicControlComponent implements OnInit {
+export class DynamicInputComponent extends BaseDynamicControlComponent   {
 
 
-  ngOnInit(): void {
-  }
-
-
+  
 }
