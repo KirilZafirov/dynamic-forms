@@ -19,12 +19,15 @@ export const widgetDisplayOptions = {
     name: {
       placeholder: "Widget name",
       default: null,
-      type: "input"
+      controlType: "input"
     },
     labelType: {
       placeholder: "Label type",
       default: "no-label",
-      type: "select-with-options",
+      controlType: "select-with-options",
+      multiSelectEnabled: false,
+      selectAllEnabled: false,
+      searchEnabled: false, 
       options: [
         { name: "Simple", value: "no-label" },
         { name: "Currency", value: "currency" },
@@ -34,7 +37,10 @@ export const widgetDisplayOptions = {
     labelCurrency: {
       placeholder: "Label currency",
       default: null,
-      type: "select-with-options",
+      controlType: "select-with-options",
+      multiSelectEnabled: false,
+      selectAllEnabled: false,
+      searchEnabled: false, 
       options: [
         { name: "USD", value: "usd" },
         { name: "EURO", value: "euro" },
@@ -44,12 +50,12 @@ export const widgetDisplayOptions = {
     labelTextPrefix: {
       placeholder: "Prefix",
       default: null,
-      type: "input"
+      controlType: "input"
     },
     labelTextSuffix: {
       placeholder: "Suffix",
       default: null,
-      type: "input"
+      controlType: "input"
     },
   },
   formDataFillInTheBlanks: {

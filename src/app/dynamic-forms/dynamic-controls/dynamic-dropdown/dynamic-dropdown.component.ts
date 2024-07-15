@@ -14,8 +14,8 @@ import { DropdownSelectComponent, SelectOption } from '../../../dropdown/dropdow
     <ng-container [formGroup]="formGroup"> 
            <div style="min-width: 250px;">
              <ng-template #dropdownTemplate let-item let-highlight="highlight">
-                <strong>{{ item.displayValue }}</strong
-               >({{ highlight }})
+                <strong>{{ item.name }}</strong
+               >{{ highlight }}
              </ng-template> 
            
              <dropdown-select

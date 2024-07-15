@@ -18,7 +18,8 @@ export class DynamicControlResolverService {
     input: DynamicInputComponent,
     select: DynamicSelectComponent,
     dropdown: DynamicDropdownComponent,
-    fieldControl: DynamicFieldComponent
+    fieldControl: DynamicFieldComponent,
+    'select-with-options': DynamicDropdownComponent
   };
 
   resolve(controlType: keyof DynamicControlMap) {

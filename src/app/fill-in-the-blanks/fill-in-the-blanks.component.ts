@@ -13,10 +13,17 @@ import { HttpClient } from '@angular/common/http';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FillInTheBlanksComponent {
-  configDisplayOptions = widgetDisplayOptions;
+  configDisplayOptions: DynamicFormConfig = {
+    description: 'FIll In The Blanks',
+    controls: widgetDisplayOptions.formData as any
+  } ;
+ 
   @Output() buildForm = new EventEmitter<DynamicFormConfig>();
   #http = inject(HttpClient);
 
+  ngOnInit() {
+    this.buildForm.emit(this.configDisplayOptions)
+  }
   createFormComponent() {
     this.#http.get<DynamicFormConfig>(`assets/company.form.json`).pipe(
       tap((formConfig: DynamicFormConfig) => {

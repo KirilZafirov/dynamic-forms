@@ -15,7 +15,7 @@ import { BaseDynamicControlComponent } from '../base-dynamic-control/base-dynami
         [formGroup]="formGroup"
     >
       <select [id]="control.controlKey" [value]="control.config.value">
-        <option *ngFor="let option of control.config.options" [value]="option.value">{{option.displayValue}}</option>
+        <option *ngFor="let option of control.config.options" [value]="option.value">{{option.name}}</option>
       </select>
     </ng-container>
 

@@ -21,9 +21,9 @@
       "selectAllEnabled": false,
       "searchEnabled": false, 
       "options": [
-        { "displayValue": "Up to 50 employees", "value": "small" },
-        { "displayValue": "50 - 150 employees", "value": "medium" },
-        { "displayValue": "More than 150 employees", "value": "large" }
+        { "name": "Up to 50 employees", "value": "small" },
+        { "name": "50 - 150 employees", "value": "medium" },
+        { "name": "More than 150 employees", "value": "large" }
       ]
     },
     "somethingRandom": {
@@ -34,9 +34,9 @@
       "selectAllEnabled": true,
       "searchEnabled": false, 
       "options": [
-        { "displayValue": "Up to 50 employees", "value": "small" },
-        { "displayValue": "50 - 150 employees", "value": "medium" },
-        { "displayValue": "More than 150 employees", "value": "large" }
+        { "name": "Up to 50 employees", "value": "small" },
+        { "name": "50 - 150 employees", "value": "medium" },
+        { "name": "More than 150 employees", "value": "large" }
       ]
     }
   }

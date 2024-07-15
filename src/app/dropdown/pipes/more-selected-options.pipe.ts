@@ -14,7 +14,7 @@ export class MoreSelectedOptionsPipe implements PipeTransform {
     return [
       ...selectOptions
         .slice(SELECTED_ITEM_LIMIT, ITEM_LIMIT)
-        .map((selectOption) => selectOption.displayValue),
+        .map((selectOption) => selectOption.name),
       ...(leftOver > 0 ? [`+ ${leftOver} more items`] : []),
     ];
   }

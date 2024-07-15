@@ -33,12 +33,12 @@ export const deepCopy = <T>(value: T): T => {
 export interface SelectOption {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value?: any;
-  displayValue: string;
+  name: string;
   additionalOptions?: {
     [key: string]: unknown;
   };
   // only allow to go one level deep with subOptions
-  subOptions?: Pick<SelectOption, 'value' | 'displayValue' | 'additionalOptions'>[];
+  subOptions?: Pick<SelectOption, 'value' | 'name' | 'additionalOptions'>[];
 }
 
 @Component({
@@ -81,7 +81,7 @@ export class DropdownSelectComponent
   @Input() public searchEnabled = false;
   @Input() public multiSelectEnabled = false;
   @Input() public selectAllEnabled = false;
-  @Input() public emptyDisplayValue = 'Empty value';
+  @Input() public emptyname = 'Empty value';
   @Input() public selectedItemLimit = SELECTED_ITEM_LIMIT;
   @Output() public readonly selectionChange = new EventEmitter<any>();
 
@@ -106,20 +106,20 @@ export class DropdownSelectComponent
   private checkMaxHeightBasedOnDropdownItemListSubscription!: Subscription;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  @Input() public toStringFunction: (displayValue?: any, highlight?: string) => string | SafeHtml =
-    (displayValue?: any, highlight?: string) => {
-      if (!displayValue) {
+  @Input() public toStringFunction: (name?: any, highlight?: string) => string | SafeHtml =
+    (name?: any, highlight?: string) => {
+      if (!name) {
         return '';
       }
       if (!highlight) {
-        return `${displayValue}`;
+        return `${name}`;
       }
       // match lowercase
       const regex = new RegExp(`(${highlight})`, 'gmi');
-      let workingItem = `${displayValue}`;
+      let workingItem = `${name}`;
       const matches = workingItem.match(regex);
       matches?.forEach((match) => {
-        workingItem = `${displayValue}`.replace(match, `<em>${match}</em>`);
+        workingItem = `${name}`.replace(match, `<em>${match}</em>`);
       });
       return this.#domSanitizer.bypassSecurityTrustHtml(workingItem);
     };
@@ -127,7 +127,7 @@ export class DropdownSelectComponent
     searchValue: string,
     selectOption: SelectOption,
   ) => boolean = (searchValue: string, selectOption: SelectOption) => {
-    return `${selectOption.displayValue}`.toLowerCase().includes(searchValue.toLowerCase());
+    return `${selectOption.name}`.toLowerCase().includes(searchValue.toLowerCase());
   };
 
   @Input() public valueCompareFunction: (valueOne: any, valueTwo: any) => boolean = (
@@ -492,7 +492,7 @@ export class DropdownSelectComponent
   private updateSearchValue(): void {
     let newSearchValue: string | SafeHtml = '';
     if (!this.multiSelectEnabled) {
-      newSearchValue = this.toStringFunction(this.selectedItems[0]?.displayValue);
+      newSearchValue = this.toStringFunction(this.selectedItems[0]?.name);
     }
 
     // set search and reset availableItems

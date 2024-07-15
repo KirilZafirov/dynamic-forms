@@ -9,7 +9,7 @@
         : 'Select'
       : multiSelectEnabled
       ? null
-      : toStringFunction(selectedItems[0].displayValue)
+      : toStringFunction(selectedItems[0].name)
   "
 >
   <button
@@ -27,7 +27,7 @@
           : 'Select'
         : multiSelectEnabled
         ? null
-        : toStringFunction(selectedItems[0].displayValue)
+        : toStringFunction(selectedItems[0].name)
     "
   >
     <div
@@ -40,7 +40,7 @@
             class="dropdown-select__selected-item" 
             [class.dropdown-select__selected-item--multiple]="multiSelectEnabled"
             [attr.title]="
-              itemTemplate ? toStringFunction(selectedItem.displayValue) : selectedItem.displayValue
+              itemTemplate ? toStringFunction(selectedItem.name) : selectedItem.name
             "
           >
             <div class="dropdown-select__selected-item-wrapper">
@@ -62,8 +62,8 @@
               ></ng-container>
                 }
               
-              @if(selectedItem.displayValue) {
-                {{ toStringFunction(selectedItem.displayValue) }}
+              @if(selectedItem.name) {
+                {{ toStringFunction(selectedItem.name) }}
               } 
               } 
              
@@ -197,7 +197,7 @@
             class="dropdown-item dropdown-select__item"
             [class.dropdown-select__item--sub-item]="subItem"
             [class.dropdown-select__item--selected]="isSelectedItem(item, group) && !itemTemplate"
-            [attr.title]="item.displayValue"
+            [attr.title]="item.name"
             (click)="handleItemClick(item, group)"
           >
           @if (multiSelectEnabled) {
@@ -212,7 +212,7 @@
               @if (!itemTemplate) {
                 <div 
                 class="dropdown-select__item-inner"
-                [innerHTML]="toStringFunction(item.displayValue, searchFormControl.value)"
+                [innerHTML]="toStringFunction(item.name, searchFormControl.value)"
               ></div>
               } 
             @if (itemTemplate) {

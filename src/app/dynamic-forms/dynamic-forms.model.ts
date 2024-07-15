@@ -8,6 +8,7 @@ export interface DynamicControl<T = string> {
   type?: string;
   options?: SelectOption[];
   label: string;
+  default?: T | null;
   multiSelectEnabled?: boolean;
   selectAllEnabled?: boolean;
   searchEnabled?: boolean; 
