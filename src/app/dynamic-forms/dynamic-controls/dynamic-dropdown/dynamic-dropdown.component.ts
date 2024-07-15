@@ -40,7 +40,7 @@ import { DropdownSelectComponent, SelectOption } from '../../../dropdown/dropdow
 })
 export class DynamicDropdownComponent extends BaseDynamicControlComponent   {
   
-  public readonly objectToStringFunction = (item: any) => item.name;
+  public readonly objectToStringFunction = (item: any) => item?.name
 
   public objectSearchMatchFunction = (searchValue: string, item: SelectOption) => {
     return `${item.value.name}`.toLowerCase().includes(searchValue.toLowerCase());
